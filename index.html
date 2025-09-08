@@ -1,0 +1,1131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LEARNIX - Complete Educational Platform</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #1a1f35 0%, #2d3456 100%);
+            color: #fff;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding-bottom: 60px;
+        }
+        
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1a1f35 0%, #2d3456 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+        
+        .loader {
+            border: 5px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            border-top: 5px solid #3498db;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+        
+        .loading-text {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #3498db, #2ecc71);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .loading-status {
+            text-align: center;
+            color: #a8b1cf;
+            max-width: 300px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        header {
+            background: rgba(26, 31, 53, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 8px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: transparent;
+            padding: 5px;
+        }
+        
+        .logo-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, #3498db, #2ecc71);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .header-cta {
+            background: linear-gradient(45deg, #3498db, #2ecc71);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .header-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+        }
+        
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .hero {
+            text-align: center;
+            padding: 40px 20px;
+            margin-bottom: 40px;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            background: linear-gradient(45deg, #3498db, #2ecc71);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            color: #a8b1cf;
+            max-width: 800px;
+            margin: 0 auto 30px;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .hero-btn {
+            background: linear-gradient(45deg, #3498db, #2ecc71);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .hero-btn.secondary {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .hero-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(52, 152, 219, 0.3);
+        }
+        
+        .section-header {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .section-header h2 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #3498db, #2ecc71);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .section-subtitle {
+            color: #a8b1cf;
+            font-size: 1rem;
+        }
+        
+        .live-section {
+            margin-bottom: 40px;
+        }
+        
+        .live-section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .live-section-header h2 {
+            font-size: 1.8rem;
+            background: linear-gradient(45deg, #3498db, #2ecc71);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .premium-badge {
+            background: linear-gradient(45deg, #3498db, #2ecc71);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .live-indicator {
+            background: linear-gradient(45deg, #3498db, #2ecc71);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            animation: pulse 2s infinite;
+        }
+        
+        .live-classes {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            gap: 20px;
+        }
+        
+        .live-card {
+            background: linear-gradient(135deg, #1a1f35 0%, #2d3456 100%);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15), inset 0 1px 1px rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .live-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+        
+        .live-card-left {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .live-class-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 10px;
+            overflow: hidden;
+            background: linear-gradient(45deg, #3498db, #2ecc71);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .live-class-img i {
+            font-size: 24px;
+            color: white;
+        }
+        
+        .live-class-info {
+            flex: 1;
+        }
+        
+        .live-class-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .live-class-instructor {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 12px;
+            color: #a8b1cf;
+            font-size: 0.9rem;
+        }
+        
+        .instructor-badge {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.8rem;
+        }
+        
+        .class-meta {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+        }
+        
+        .class-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.9rem;
+            color: #a8b1cf;
+        }
+        
+        .class-level {
+            padding: 3px 10px;
+            border-radius: 10px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .class-level.advanced {
+            background: rgba(52, 152, 219, 0.2);
+            color: #3498db;
+        }
+        
+        .live-class-details {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #3498db;
+            font-weight: 600;
+        }
+        
+        .live-card-action {
+            background: linear-gradient(45deg, #3498db, #2ecc71);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: auto;
+            text-decoration: none;
+        }
+        
+        .live-card-action:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+        }
+        
+        .live-card-action.disabled {
+            background: rgba(255, 255, 255, 0.1);
+            cursor: not-allowed;
+        }
+        
+        .live-card-action.disabled:hover {
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .feature-card {
+            background: linear-gradient(135deg, #1a1f35 0%, #2d3456 100%);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15), inset 0 1px 1px rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+        
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #3498db, #2ecc71);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-size: 24px;
+            color: white;
+        }
+        
+        .feature-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .feature-desc {
+            font-size: 0.9rem;
+            color: #a8b1cf;
+        }
+        
+        .subjects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .subject-card {
+            background: linear-gradient(135deg, #1a1f35 0%, #2d3456 100%);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15), inset 0 1px 1px rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-decoration: none;
+            color: inherit;
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .subject-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+        
+        .subject-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        
+        .subject-img i {
+            font-size: 24px;
+            color: #3498db;
+        }
+        
+        .subject-content {
+            flex: 1;
+        }
+        
+        .subject-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .subject-desc {
+            font-size: 0.9rem;
+            color: #a8b1cf;
+        }
+        
+        .card-arrow {
+            color: #a8b1cf;
+            transition: all 0.3s ease;
+        }
+        
+        .subject-card:hover .card-arrow {
+            transform: translateX(5px);
+            color: #3498db;
+        }
+        
+        footer {
+            background: rgba(26, 31, 53, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 30px 20px;
+            text-align: center;
+            margin-top: 40px;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #3498db, #2ecc71);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .copyright {
+            color: #a8b1cf;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+        
+        .developer {
+            color: #a8b1cf;
+            font-size: 0.9rem;
+        }
+        
+        .telegram-popup {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: linear-gradient(45deg, #3498db, #2ecc71);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+            cursor: pointer;
+            z-index: 99;
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+        }
+        
+        .telegram-popup:hover {
+            transform: scale(1.1);
+        }
+        
+        .telegram-popup i {
+            color: white;
+            font-size: 28px;
+        }
+        
+        .telegram-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .telegram-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal-content {
+            background: linear-gradient(135deg, #1a1f35 0%, #2d3456 100%);
+            border-radius: 15px;
+            padding: 30px;
+            max-width: 400px;
+            width: 90%;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            position: relative;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+        }
+        
+        .telegram-modal.active .modal-content {
+            transform: translateY(0);
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            color: #a8b1cf;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .modal-close:hover {
+            color: #3498db;
+            transform: rotate(90deg);
+        }
+        
+        .modal-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #3498db, #2ecc71);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 36px;
+            color: white;
+        }
+        
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        .modal-desc {
+            color: #a8b1cf;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        .modal-link {
+            display: inline-block;
+            background: linear-gradient(45deg, #3498db, #2ecc71);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .modal-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 0.8; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .live-classes {
+                grid-template-columns: 1fr;
+            }
+            
+            .live-section-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .features, .subjects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .live-card-left {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .live-class-img {
+                align-self: center;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .modal-content {
+                padding: 20px;
+            }
+            
+            .modal-title {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="loading-screen">
+        <div class="loader"></div>
+        <div class="loading-text">LEARNIX</div>
+        <div class="loading-status">Empowering Minds, Unlocking Excellence – Complete Class 9 CBSE Learning Platform</div>
+    </div>
+
+    <header>
+        <div class="header-left">
+            <div class="logo">
+                <div class="logo-img">
+                    <img src="https://i.supaimg.com/73f6e3b1-211e-4b7e-9eac-9881f90bc471.png" alt="LEARNIX Logo">
+                </div>
+                <div class="logo-text">LEARNIX</div>
+            </div>
+        </div>
+        <a href="https://t.me/LearnixArrambh" class="header-cta">
+            <i class="fab fa-telegram"></i> Join Telegram
+        </a>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>LEARNIX Aarambh – Complete Class 9 CBSE</h1>
+            <p>Master your Class 9 CBSE syllabus with free lectures, comprehensive notes, and practice problems. Learn smart, score high! 📚</p>
+            <div class="hero-buttons">
+                <a href="https://t.me/LearnixArrambh" class="hero-btn">
+                    <i class="fab fa-telegram"></i> Join Our Telegram
+                </a>
+                <a href="#live-classes" class="hero-btn secondary">
+                    <i class="fas fa-video"></i> Explore Live Classes
+                </a>
+            </div>
+        </section>
+
+        <section class="features">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-video"></i>
+                </div>
+                <h3 class="feature-title">Video Lectures</h3>
+                <p class="feature-desc">High-quality video lectures covering all topics in the CBSE curriculum.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-sticky-note"></i>
+                </div>
+                <h3 class="feature-title">Study Notes</h3>
+                <p class="feature-desc">Comprehensive notes for each chapter to help you revise effectively.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-file-alt"></i>
+                </div>
+                <h3 class="feature-title">Practice Problems</h3>
+                <p class="feature-desc">Daily practice problems with solutions to strengthen your concepts.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                </div>
+                <h3 class="feature-title">Live Classes</h3>
+                <p class="feature-desc">Interactive live classes with expert teachers for doubt clearing.</p>
+            </div>
+        </section>
+
+        <section class="live-section" id="live-classes">
+            <div class="section-header">
+                <h2>Live Classes</h2>
+                <p class="section-subtitle">Join our interactive live sessions</p>
+            </div>
+            
+            <div class="live-classes">
+                <div class="live-card">
+                    <div class="live-card-left">
+                        <div class="live-class-img">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                        </div>
+                        <div class="live-class-info">
+                            <div class="live-class-title">
+                                Mathematics Live Class
+                                <span class="premium-badge"><i class="fas fa-crown"></i> Pro</span>
+                            </div>
+                            <div class="live-class-instructor">
+                                <i class="fas fa-user-circle"></i> Prof. Rohan Sharma
+                                <span class="instructor-badge">Expert</span>
+                            </div>
+                            <div class="class-meta">
+                                <div class="class-meta-item">
+                                    <i class="fas fa-clock"></i> 60 min
+                                </div>
+                                <div class="class-meta-item">
+                                    <i class="fas fa-calendar"></i> Mon, Wed, Fri
+                                </div>
+                                <div class="class-level advanced">Advanced</div>
+                            </div>
+                            <div class="live-class-details">
+                                <i class="fas fa-broadcast-tower"></i> <span>Starts at 5:00 PM</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <a href="https://learnix-player-nine.vercel.app/?play=aHR0cHM6Ly9kZ2E5a21lMDgwbzB3LmNsb3VkZnJvbnQubmV0L291dC92MS9lMDFiYWEyMGNjYWY0NmMzYjY3YmVjNmQwM2ZmNjEzOC9pbmRleF80Lm0zdTg/c3RhcnQ9MTc1NzMzMTAwMw==" class="live-card-action">
+                        <i class="fas fa-play-circle"></i> Join Class at 5:00 PM
+                    </a>
+                </div>
+                
+                <div class="live-card">
+                    <div class="live-card-left">
+                        <div class="live-class-img">
+                            <i class="fas fa-atom"></i>
+                        </div>
+                        <div class="live-class-info">
+                            <div class="live-class-title">
+                                Science Live Class
+                                <span class="premium-badge"><i class="fas fa-crown"></i> Pro</span>
+                            </div>
+                            <div class="live-class-instructor">
+                                <i class="fas fa-user-circle"></i> Dr. Priya Singh
+                                <span class="instructor-badge">Expert</span>
+                            </div>
+                            <div class="class-meta">
+                                <div class="class-meta-item">
+                                    <i class="fas fa-clock"></i> 75 min
+                                </div>
+                                <div class="class-meta-item">
+                                    <i class="fas fa-calendar"></i> Tue, Thu, Sat
+                                </div>
+                                <div class="class-level">Intermediate</div>
+                            </div>
+                            <div class="live-class-details">
+                                <i class="fas fa-broadcast-tower"></i> <span>Starts at 8:00 PM</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <a href="https://learnix-player-nine.vercel.app/?play=aHR0cHM6Ly9kMTMzdzZsZHJlazFlci5jbG91ZGZyb250Lm5ldC9vdXQvdjEvYzkyMzc4N2Y2YjNiNDBjYmJmYmRjNTFkMmQ3NmU1MWUvaW5kZXhfNC5tM3U4P3N0YXJ0PTE3NTczNDIzNzE=" class="live-card-action disabled">
+                        <i class="fas fa-clock"></i> Class at 8:00 PM
+                    </a>
+                </div>
+            </div>
+        </section>
+        
+        <section class="subjects-section">
+            <div class="section-header">
+                <h2>Study Materials</h2>
+                <p class="section-subtitle">Access comprehensive learning resources for all subjects</p>
+            </div>
+            
+            <div class="subjects-grid">
+                <div class="subject-card" onclick="window.location.href='https://rolexcoderz.live/9thMaths/'">
+                    <div class="subject-img">
+                        <i class="fas fa-calculator"></i>
+                    </div>
+                    <div class="subject-content">
+                        <p class="subject-title">Mathematics</p>
+                        <p class="subject-desc">Complete notes and practice problems</p>
+                    </div>
+                    <i class="fas fa-chevron-right card-arrow"></i>
+                </div>
+                
+                <div class="subject-card" onclick="window.location.href='https://rolexcoderz.live/9thScience/'">
+                    <div class="subject-img">
+                        <i class="fas fa-atom"></i>
+                    </div>
+                    <div class="subject-content">
+                        <p class="subject-title">Science</p>
+                        <p class="subject-desc">Physics, Chemistry, and Biology</p>
+                    </div>
+                    <i class="fas fa-chevron-right card-arrow"></i>
+                </div>
+                
+                <div class="subject-card" onclick="window.location.href='https://rolexcoderz.live/9thSST/'">
+                    <div class="subject-img">
+                        <i class="fas fa-globe-asia"></i>
+                    </div>
+                    <div class="subject-content">
+                        <p class="subject-title">Social Science</p>
+                        <p class="subject-desc">History, Geography, Civics, Economics</p>
+                    </div>
+                    <i class="fas fa-chevron-right card-arrow"></i>
+                </div>
+                
+                <div class="subject-card" onclick="window.location.href='https://rolexcoderz.live/9thEng/'">
+                    <div class="subject-img">
+                        <i class="fas fa-language"></i>
+                    </div>
+                    <div class="subject-content">
+                        <p class="subject-title">English</p>
+                        <p class="subject-desc">Literature and Grammar</p>
+                    </div>
+                    <i class="fas fa-chevron-right card-arrow"></i>
+                </div>
+                
+                <div class="subject-card" onclick="window.location.href='https://rolexcoderz.live/9thHindi/'">
+                    <div class="subject-img">
+                        <i class="fas fa-language"></i>
+                    </div>
+                    <div class="subject-content">
+                        <p class="subject-title">Hindi</p>
+                        <p class="subject-desc">Complete Hindi curriculum</p>
+                    </div>
+                    <i class="fas fa-chevron-right card-arrow"></i>
+                </div>
+                
+                <div class="subject-card" onclick="window.location.href='https://rolexcoderz.live/9thSanskrit/'">
+                    <div class="subject-img">
+                        <i class="fas fa-language"></i>
+                    </div>
+                    <div class="subject-content">
+                        <p class="subject-title">Sanskrit</p>
+                        <p class="subject-desc">Sanskrit language and literature</p>
+                    </div>
+                    <i class="fas fa-chevron-right card-arrow"></i>
+                </div>
+                
+                <div class="subject-card" onclick="window.location.href='https://rolexcoderz.live/9thIT/'">
+                    <div class="subject-img">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <div class="subject-content">
+                        <p class="subject-title">Information Technology</p>
+                        <p class="subject-desc">Computer science and IT skills</p>
+                    </div>
+                    <i class="fas fa-chevron-right card-arrow"></i>
+                </div>
+                
+                <div class="subject-card" onclick="window.location.href='https://rolexcoderz.live/9thIT/'">
+                    <div class="subject-img">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="subject-content">
+                        <p class="subject-title">Artificial Intelligence</p>
+                        <p class="subject-desc">AI concepts and applications</p>
+                    </div>
+                    <i class="fas fa-chevron-right card-arrow"></i>
+                </div>
+                
+                <div class="subject-card" onclick="window.location.href='https://rolexcoderz.live/9th/'">
+                    <div class="subject-img">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <div class="subject-content">
+                        <p class="subject-title">Time Table</p>
+                        <p class="subject-desc">Weekly schedule and planner</p>
+                    </div>
+                    <i class="fas fa-chevron-right card-arrow"></i>
+                </div>
+                
+                <div class="subject-card" onclick="window.location.href='https://rolexcoderz.live/9thHW/'">
+                    <div class="subject-img">
+                        <i class="fas fa-sun"></i>
+                    </div>
+                    <div class="subject-content">
+                        <p class="subject-title">Holiday Homework</p>
+                        <p class="subject-desc">Summer holiday assignments</p>
+                    </div>
+                    <i class="fas fa-chevron-right card-arrow"></i>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">LEARNIX</div>
+            <p class="copyright">© 2023 LEARNIX. All rights reserved.</p>
+            <p class="developer">Website Developed By Murli Kumar</p>
+        </div>
+    </footer>
+
+    <div class="telegram-popup">
+        <i class="fab fa-telegram"></i>
+    </div>
+
+    <div class="telegram-modal">
+        <div class="modal-content">
+            <button class="modal-close">&times;</button>
+            <div class="modal-icon">
+                <i class="fab fa-telegram"></i>
+            </div>
+            <h3 class="modal-title">Join Our Telegram Channel</h3>
+            <p class="modal-desc">Get daily updates, study materials, and notifications about live classes. Join our community of learners today!</p>
+            <a href="https://t.me/LearnixArrambh" class="modal-link">Join Now</a>
+        </div>
+    </div>
+
+    <script>
+        // Simple loading screen removal
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                document.querySelector('.loading-screen').style.opacity = '0';
+                setTimeout(function() {
+                    document.querySelector('.loading-screen').style.display = 'none';
+                }, 500);
+            }, 1500);
+        });
+        
+        // Telegram popup functionality
+        document.querySelector('.telegram-popup').addEventListener('click', function() {
+            document.querySelector('.telegram-modal').classList.add('active');
+        });
+        
+        document.querySelector('.modal-close').addEventListener('click', function() {
+            document.querySelector('.telegram-modal').classList.remove('active');
+        });
+        
+        // Close modal when clicking outside
+        document.querySelector('.telegram-modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                this.classList.remove('active');
+            }
+        });
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            // Show telegram modal after 5 seconds
+            setTimeout(function() {
+                document.querySelector('.telegram-modal').classList.add('active');
+            }, 5000);
+            
+            // Update live class status
+            updateClassStatus();
+            setInterval(updateClassStatus, 60000); // Update every minute
+        });
+        
+        // Function to update class status based on current time
+        function updateClassStatus() {
+            const now = new Date();
+            const currentHour = now.getHours();
+            const currentMinute = now.getMinutes();
+            const currentTime = currentHour * 60 + currentMinute;
+            
+            // Class times in minutes (5:00 PM = 17*60 = 1020, 8:00 PM = 20*60 = 1200)
+            const class1Time = 17 * 60; // 5:00 PM
+            const class2Time = 20 * 60; // 8:00 PM
+            
+            // Get status elements
+            const class1Status = document.querySelector('.live-card:nth-child(1) .live-class-details span');
+            const class2Status = document.querySelector('.live-card:nth-child(2) .live-class-details span');
+            const class1Button = document.querySelector('.live-card:nth-child(1) .live-card-action');
+            const class2Button = document.querySelector('.live-card:nth-child(2) .live-card-action');
+            
+            // Update class 1 status
+            if (currentTime < class1Time - 15) {
+                // Class hasn't started yet
+                const timeLeft = class1Time - currentTime;
+                const hours = Math.floor(timeLeft / 60);
+                const minutes = timeLeft % 60;
+                
+                if (hours > 0) {
+                    class1Status.textContent = `Starts in ${hours}h ${minutes}m`;
+                } else {
+                    class1Status.textContent = `Starts in ${minutes}m`;
+                }
+                class1Button.classList.remove('disabled');
+                class1Button.innerHTML = '<i class="fas fa-play-circle"></i> Join Class at 5:00 PM';
+            } else if (currentTime >= class1Time - 15 && currentTime < class1Time + 60) {
+                // Class is live or about to start
+                class1Status.innerHTML = '<i class="fas fa-circle" style="color: #e74c3c; animation: pulse 1s infinite;"></i> LIVE NOW';
+                class1Button.classList.remove('disabled');
+                class1Button.innerHTML = '<i class="fas fa-play-circle"></i> Join Live Class';
+            } else {
+                // Class has ended
+                class1Status.textContent = 'Class ended';
+                class1Button.classList.add('disabled');
+                class1Button.innerHTML = '<i class="fas fa-clock"></i> Class at 5:00 PM';
+            }
+            
+            // Update class 2 status
+            if (currentTime < class2Time - 15) {
+                // Class hasn't started yet
+                const timeLeft = class2Time - currentTime;
+                const hours = Math.floor(timeLeft / 60);
+                const minutes = timeLeft % 60;
+                
+                if (hours > 0) {
+                    class2Status.textContent = `Starts in ${hours}h ${minutes}m`;
+                } else {
+                    class2Status.textContent = `Starts in ${minutes}m`;
+                }
+                class2Button.classList.add('disabled');
+                class2Button.innerHTML = '<i class="fas fa-clock"></i> Class at 8:00 PM';
+            } else if (currentTime >= class2Time - 15 && currentTime < class2Time + 60) {
+                // Class is live or about to start
+                class2Status.innerHTML = '<i class="fas fa-circle" style="color: #e74c3c; animation: pulse 1s infinite;"></i> LIVE NOW';
+                class2Button.classList.remove('disabled');
+                class2Button.innerHTML = '<i class="fas fa-play-circle"></i> Join Live Class';
+            } else {
+                // Class has ended
+                class2Status.textContent = 'Class ended';
+                class2Button.classList.add('disabled');
+                class2Button.innerHTML = '<i class="fas fa-clock"></i> Class at 8:00 PM';
+            }
+        }
+    </script>
+</body>
+</html>
